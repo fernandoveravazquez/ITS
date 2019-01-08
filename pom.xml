@@ -1,0 +1,399 @@
+<!--
+  ~ Copyright (c) 2016-2018. Bx+. México
+  ~
+  ~ El código fuente y todos los componentes y archivos de
+  ~ éste software son propiedad intelectual de Bx+
+  -->
+<!-- clean install compile package -->
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.its.openpay</groupId>
+    <artifactId>Openpay</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Openpay</name>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <prerequisites>
+        <maven>${maven-prerequisites}</maven>
+    </prerequisites>
+    <properties>
+        <sonar.language>java</sonar.language>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-war-plugin-version>2.5</maven-war-plugin-version>
+        <maven-compiler-plugin-version>3.5</maven-compiler-plugin-version>
+        <maven-antrun-plugin-version>1.8</maven-antrun-plugin-version>
+        <java-version>1.8</java-version>
+        <spring-version>4.3.9.RELEASE</spring-version>
+        <spring-security-version>4.2.3.RELEASE</spring-security-version>
+        <spring-data-jpa-version>1.11.4.RELEASE</spring-data-jpa-version>
+        <commons-lang3.version>3.6</commons-lang3.version>
+        <java-tx-api-version>1.2</java-tx-api-version>
+        <joda-time-version>2.9.9</joda-time-version>
+        <jackson-databind-version>2.8.9</jackson-databind-version>
+        <jackson-datatype-joda>2.4.0</jackson-datatype-joda>
+        <lombok-maven-plugin-version>1.16.12.0</lombok-maven-plugin-version>
+        <lombok-version>1.16.18</lombok-version>
+        <its-jframework-version>1.0-RELEASE</its-jframework-version>
+        <maven-prerequisites>3.3.9</maven-prerequisites>
+        <openpay-version>1.0.7</openpay-version>
+        <orika-version>1.5.1</orika-version>
+        <slf4-log4j12-version>1.7.25</slf4-log4j12-version>
+        <slf4-api-version>1.7.25</slf4-api-version>
+        <hibernate-version>5.2.10.Final</hibernate-version>
+        <hibernate-jpa-version>1.0.0.Final</hibernate-jpa-version>
+        <eclipselink-version>2.6.4</eclipselink-version>
+        <javax-servlet-api-version>3.1.0</javax-servlet-api-version>
+        <javax-servlet-jstl-version>1.2</javax-servlet-jstl-version>
+        <javax-servlet-jsp-api-version>2.2</javax-servlet-jsp-api-version>
+        <ziplet-version>2.2.0</ziplet-version>
+        <httpclient-version>4.3.5</httpclient-version><!-- 4.3.5-->
+    </properties>
+    <developers>
+        <developer>
+            <name>Alejandro Aridaid Vargas</name>
+            <email>alejandro.vargas@its-soluciones.com.mx</email>
+        </developer>
+        <developer>
+            <name>Nancy Ramírez</name>
+            <email>nancy.ramirez@its-soluciones.com.mx</email>
+        </developer>
+        <developer>
+            <name>Rafael Calderon</name>
+            <email>rafael.calderon@its-soluciones.com.mx</email>
+        </developer>
+    </developers>
+    <dependencies>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-version}</version>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-openid</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+
+        <!-- Spring Data JPA -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa-version}</version>
+        </dependency>
+
+        <!-- Spring Session -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+            <version>1.3.1.RELEASE</version>
+        </dependency>
+
+        <!-- JPA -->
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>${java-tx-api-version}</version>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>${hibernate-jpa-version}</version>
+        </dependency>
+
+        <!-- SLF4 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4-log4j12-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok-version}</version>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind-version}</version>
+        </dependency>
+
+        <!-- Openpay -->
+        <dependency>
+            <groupId>mx.openpay</groupId>
+            <artifactId>openpay-api-client</artifactId>
+            <version>${openpay-version}</version>
+        </dependency>
+
+        <!-- ITS -->
+        <dependency>
+            <groupId>mx.com.its</groupId>
+            <artifactId>JFrameworkCore</artifactId>
+            <version>${its-jframework-version}</version>
+        </dependency>
+
+        <!-- ORIKA -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>${orika-version}</version>
+        </dependency>
+
+        <!-- JSP, TagLib, JSTL, Servlet-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${javax-servlet-jstl-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax-servlet-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${javax-servlet-jsp-api-version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--Axis 2-->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-kernel</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-adb</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-local</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-http</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+
+        <!-- Hora y fecha -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${jackson-datatype-joda}</version>
+        </dependency>
+
+        <!-- JPA EclipseLink -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient-version}</version>
+        </dependency>
+
+        <!-- compresión -->
+        <dependency>
+            <groupId>com.github.ziplet</groupId>
+            <artifactId>ziplet</artifactId>
+            <version>${ziplet-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+       
+        <!-- Junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+         <!--commons net ftp-->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.6</version>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <!-- clean:clean compile resources:resources package antrun:run@ant-execute -->
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>${project.build.directory}/generated-sources/delombok</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/i18n</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>${lombok-maven-plugin-version}</version>
+                <!--comentar en pruebas locales-->
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <id>delombok</id>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                        <configuration>
+                            <addOutputDirectory>false</addOutputDirectory>
+                            <sourceDirectory>src/main/java</sourceDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <compilerVersion>${java-version}</compilerVersion>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <proc>none</proc>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin-version}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven-antrun-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <id>ant-execute</id>
+                        <configuration>
+                            <target name="delete generated sources">
+                                <delete dir="${project.build.directory}/generated-sources"/>
+                                <delete dir="${project.build.directory}/antrun"/>
+                                <delete dir="${project.build.directory}/classes"/>
+                                <delete dir="${project.build.directory}/maven-archiver"/>
+                                <delete dir="${project.build.directory}/maven-status"/>
+                            </target>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+           <!--<plugin>-->
+                <!--<groupId>org.wildfly.plugins</groupId>-->
+                <!--<artifactId>wildfly-maven-plugin</artifactId>-->
+                <!--<version>1.2.0.Final</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>deploy</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<force>true</force>-->
+                    <!--<hostname>192.168.138.126</hostname>-->
+                    <!--<port>9991</port>-->
+                    <!--<filename>Openpay.war</filename>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+</project>
